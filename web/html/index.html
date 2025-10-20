@@ -1,0 +1,17 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"><title>three-tier-lab</title></head>
+<body>
+  <h1>three-tier-lab</h1>
+  <p>↓ API 응답( items )</p>
+  <pre id="out">loading...</pre>
+  <script>
+    fetch('/api/items').then(r=>r.json()).then(d=>{
+      document.getElementById('out').textContent = JSON.stringify(d, null, 2);
+    }).catch(e=>{
+      document.getElementById('out').textContent = 'error: '+e;
+    });
+  </script>
+</body>
+</html>
+
