@@ -1,0 +1,22 @@
+name: CI - three-tier-lab
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+
+jobs:
+  test-and-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Docker
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build API image
+        run: docker compose -f docker-compose.yml build api
+
+      - name: Run tests
+        run: docker compose -f docker-compose.yml run --rm api pytest -q
